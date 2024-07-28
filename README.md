@@ -1,3 +1,8 @@
-# Django REST API
+# Task REST API
 
-Django REST API made to dive myself into the Django REST Framework.
+REST API for personal task management.
+
+This RESTful API includes:
+- Authentication
+- Automated Testing
+- Task CRUD Operations

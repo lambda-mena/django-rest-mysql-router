@@ -1,0 +1,22 @@
+[
+  {
+    "model": "api.task",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "title": "Do my bed in the morning",
+      "date": "2024-07-28T15:31:11.947Z",
+      "done": true
+    }
+  },
+  {
+    "model": "api.task",
+    "pk": 2,
+    "fields": {
+      "user": 1,
+      "title": "Bath myself",
+      "date": "2024-07-28T15:31:11.947Z",
+      "done": true
+    }
+  }
+]
