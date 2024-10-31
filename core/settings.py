@@ -13,6 +13,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from datetime import timedelta
 from pathlib import Path
 from decouple import config
+import sys
+
+TESTING = len(sys.argv) > 1 and sys.argv[1] == 'test'
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,7 +34,6 @@ ALLOWED_HOSTS = [config("HOSTNAME")]
 
 
 # Application definition
-
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -41,7 +43,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework_simplejwt",
-    "api",
+    "apps.tasks",
+    "apps.authentication",
 ]
 
 REST_FRAMEWORK = {
@@ -100,7 +103,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
-
+DATABASE_ROUTERS = ["database.router.DatabaseRouter"]
 DATABASES = {
     "default": {},
     "write": {
@@ -118,10 +121,15 @@ DATABASES = {
         "PASSWORD": config("DB_PASSWORD"),
         "HOST": config("DB_HOST"),
         "PORT": config("DB_READ_PORT"),
+    },
+    "test": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+        "TEST": {
+            "DEPENDENCIES": []
+        }
     }
 }
-
-DATABASE_ROUTERS = ["database.router.DatabaseRouter"]
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

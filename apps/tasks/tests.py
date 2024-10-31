@@ -3,14 +3,15 @@ from rest_framework.test import APITestCase
 from django.contrib.auth.models import User
 from .models import Task
 
-# Create your tests here.
+
 class TestTasks(APITestCase):
-    task_url = '/api/v1/tasks/'
     fixtures = ['users', 'tasks']
+    databases = ["test"]
+    task_url = '/api/tasks/'
 
     def setUp(self) -> None:
         super().setUp()
-        auth_response = self.client.post('/api/token/', { 'username': 'test_user', 'password': '12345678' })
+        auth_response = self.client.post('/api/auth/sign-in/', { 'username': 'test_user', 'password': '12345678' })
         token = auth_response.json().get('access')
         self.client.credentials(HTTP_AUTHORIZATION=f'Bearer {token}')
 

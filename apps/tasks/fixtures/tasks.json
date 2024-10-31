@@ -1,6 +1,6 @@
 [
   {
-    "model": "api.task",
+    "model": "tasks.task",
     "pk": 1,
     "fields": {
       "user": 1,
@@ -10,7 +10,7 @@
     }
   },
   {
-    "model": "api.task",
+    "model": "tasks.task",
     "pk": 2,
     "fields": {
       "user": 1,
